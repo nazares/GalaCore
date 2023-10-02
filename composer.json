@@ -1,14 +1,42 @@
 {
     "name": "nazares/galacore",
     "description": "The PHP MVC Framework for building web applications",
+    "keywords": ["framework", "php", "galacore"],
     "type": "library",
     "license": "MIT",
+    "readme": "",
+    "time": "",
+    "support": {
+        "issues": "https://github.com/nazares/GalaCore/issues",
+        "source": "https://github.com/nazares/GalaCore",
+        "wiki": "https://github.com/nazares/GalaCore/wiki"
+    },
     "authors": [
         {
             "name": "Sergei Nazarenko",
-            "email": "nazares@icloud.com"
+            "email": "nazares@icloud.com",
+            "role": "Developer",
+            "homepage": "https://nazares.ru"
         }
     ],
     "minimum-stability": "alpha",
-    "require": {}
+    "require": {
+        "php": "8.0.30|^8.2",
+        "ext-mbstring": "*",
+        "ext-iconv": "*",
+        "ext-pdo": "*",
+        "ext-json": "*",
+        "ext-curl": "*",
+        "ext-simplexml": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gala\\": "src/Gala"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Gala\\Tests": "tests/"
+        }
+    }
 }
