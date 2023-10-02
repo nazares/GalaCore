@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Gala\DatabaseConnection;
 
 use Gala\DatabaseConnection\Exception\DatabaseConnectionException;
-use PDO;
+use PDOException;
 
 class DatabaseConnection implements DatabaseConnectionInterface
 {
@@ -47,7 +47,7 @@ class DatabaseConnection implements DatabaseConnectionInterface
                 $this->credetials['password'],
                 $params
             );
-        } catch (Exception $exception) {
+        } catch (PDOException $exception) {
             throw new DatabaseConnectionException($exception->getMessage(), (int)$exception->getCode());
         }
         return $this->dbh;
