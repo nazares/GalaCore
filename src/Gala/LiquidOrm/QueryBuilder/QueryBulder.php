@@ -30,7 +30,7 @@ class QueryBuilder implements QueryBuilderInterface
         'raw' => ''
     ];
 
-    protected const QUERY_TYPES = ['insert', 'select', 'update', 'delete', 'raw'];
+    protected const QUERY_TYPES = ['insert', 'select', 'update', 'delete', 'raw', 'search'];
 
     /**
      * Main constructor class
@@ -88,6 +88,7 @@ class QueryBuilder implements QueryBuilderInterface
     {
         if ($this->isQueryTypeValid('update')) {
             if (is_array($this->key['fields']) && count($this->key['fields']) > 0) {
+                $values = '';
                 foreach ($this->key['fields'] as $field) {
                     if ($field !== $this->key['primary_key']) {
                         $values .= $field . " = :" . $field . ", ";
@@ -107,7 +108,7 @@ class QueryBuilder implements QueryBuilderInterface
         return false;
     }
 
-    public function delereQuery(): string
+    public function deleteQuery(): string
     {
         if ($this->isQueryTypeValid('delete')) {
             $index = array_keys($this->key['conditions']);
@@ -121,6 +122,11 @@ class QueryBuilder implements QueryBuilderInterface
             return $this->sqlQuery;
         }
         return false;
+    }
+
+    public function searchQuery(): string
+    {
+        return '';
     }
 
     public function hasConditions()
@@ -137,7 +143,7 @@ class QueryBuilder implements QueryBuilderInterface
                     $this->sqlQuery .= "WHERE " . implode(" AND", $sort);
                 }
             }
-        } else if (empty($this->key['conditions'])) {
+        } elseif (empty($this->key['conditions'])) {
             $this->sqlQuery = " WHERE 1";
         }
         if (isset($this->key['orderBy']) && $this->key['orderBy'] != '') {
@@ -151,5 +157,6 @@ class QueryBuilder implements QueryBuilderInterface
 
     public function rawQuery(): string
     {
+        return '';
     }
 }

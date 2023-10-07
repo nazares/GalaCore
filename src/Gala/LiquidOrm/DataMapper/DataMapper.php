@@ -30,14 +30,14 @@ class DataMapper implements DataMapperInterface
         $this->dbh = $db;
     }
 
-    private function isEmpty($value, string $errorMessage = null): bool
+    private function isEmpty($value, string $errorMessage = null)
     {
         if (empty($value)) {
             throw new DataMapperException($errorMessage);
         }
     }
 
-    private function isArray(array $value): bool
+    private function isArray(array $value)
     {
         if (!is_array($value)) {
             throw new DataMapperException('Your argument needs to be an array');
@@ -128,12 +128,12 @@ class DataMapper implements DataMapperInterface
 
     /**
      * @inheritDoc
-     * @return void
      */
-    public function execute(): void
+    public function execute()
     {
-        if ($this->statement)
+        if ($this->statement) {
             return $this->statement->execute();
+        }
     }
 
     /**
@@ -141,8 +141,9 @@ class DataMapper implements DataMapperInterface
      */
     public function numRows(): int
     {
-        if ($this->statement)
+        if ($this->statement) {
             return $this->statement->rowCount();
+        }
     }
 
     /**
@@ -181,6 +182,20 @@ class DataMapper implements DataMapperInterface
                     return intval($lastID);
                 }
             }
+        } catch (Throwable $throwable) {
+            throw $throwable;
+        }
+    }
+
+    public function buildQueryParameters(array $conditions = [], array $parameters = [])
+    {
+        return (!empty($parameters) || (!empty($conditions)) ? array_merge($conditions, $parameters) : $parameters);
+    }
+
+    public function persist(string $sqlQuery, array $parameters)
+    {
+        try {
+            return $this->prepare($sqlQuery)->bindParameters($parameters)->execute();
         } catch (Throwable $throwable) {
             throw $throwable;
         }
