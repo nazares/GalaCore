@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Gala\LiquidOrm\QueryBuilder;
 
+use Gala\LiquidOrm\QueryBuilder\Exception\QueryBuilderException;
 use Gala\LiquidOrm\QueryBuilder\QueryBuilderInterface;
 
 class QueryBuilderFactory

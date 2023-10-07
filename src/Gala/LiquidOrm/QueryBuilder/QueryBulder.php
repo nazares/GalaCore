@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Gala\LiquidOrm\QueryBuilder;
 
 use Gala\LiquidOrm\QueryBuilder\Exception\QueryBuilderInvalidArgumentException;
+use Gala\LiquidOrm\QueryBuilder\Exception\QueryBuilderException;
 
 class QueryBuilder implements QueryBuilderInterface
 {
