@@ -108,7 +108,15 @@ class DataMapper implements DataMapperInterface
         return $this->statement;
     }
 
-
+    /**
+     * Binds a value to a corresponding name or question mark placeholder
+     * in the SQL statement that was used to prepare the statement. Similar to
+     * above but optimised for search queries
+     *
+     * @param array $fields
+     * @return mixed
+     * @throws BaseInvalidArgumentException
+     */
     protected function bindSearchValues(array $fields)
     {
         $this->isArray($fields);
@@ -120,6 +128,7 @@ class DataMapper implements DataMapperInterface
 
     /**
      * @inheritDoc
+     * @return void
      */
     public function execute(): void
     {
@@ -138,6 +147,7 @@ class DataMapper implements DataMapperInterface
 
     /**
      * @inheritDoc
+     * @return Object
      */
     public function result(): object
     {
@@ -148,6 +158,7 @@ class DataMapper implements DataMapperInterface
 
     /**
      * @inheritDoc
+     * @return array
      */
     public function results(): array
     {
