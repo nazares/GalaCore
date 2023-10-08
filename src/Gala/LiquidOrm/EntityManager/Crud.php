@@ -152,6 +152,21 @@ class Crud implements CrudInterface
     /** @inheritDoc */
     public function rawQuery(string $rawQuery, ?array $conditions)
     {
+        try {
+            $args = [
+                'table' => $this->getSchema(),
+                'type' => 'raw',
+                'raw' => $rawQuery,
+                'conditions' => $conditions
+            ];
+            $query = $this->queryBuilder->buildQuery($args)->rawQuery();
+            $this->dataMapper->persist($query, $this->dataMapper->buildQueryParameters($conditions));
+            if ($this->dataMapper->numRows()) {
+                // TODO:
+            }
+        } catch (Throwable $throwable) {
+            throw $throwable;
+        }
     }
     //
 }
