@@ -27,7 +27,8 @@
         "ext-pdo": "*",
         "ext-json": "*",
         "ext-curl": "*",
-        "ext-simplexml": "*"
+        "ext-simplexml": "*",
+        "twig/twig": "^3.7"
     },
     "autoload": {
         "psr-4": {
@@ -36,7 +37,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Gala\\Tests": "tests/"
+            "Gala\\Tests\\": "tests/"
         }
     }
 }
