@@ -16,7 +16,7 @@ interface SessionInterface
 
     public function invalidate(): void;
 
-    public function flush(string $key, $value);
+    public function flush(string $key, $value = null);
 
     public function has(string $key): bool;
 }

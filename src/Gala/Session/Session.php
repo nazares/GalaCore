@@ -70,7 +70,7 @@ class Session implements SessionInterface
         $this->storage->invalidate();
     }
 
-    public function flush(string $key, $value)
+    public function flush(string $key, $value = null)
     {
         $this->ensureSessionKeyIsValid($key);
         try {

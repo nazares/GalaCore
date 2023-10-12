@@ -6,7 +6,7 @@ namespace Gala\Session;
 
 class SessionManager
 {
-    public function initialize()
+    public static function initialize()
     {
         $factory = new SessionFactory();
         return $factory->create('', \Gala\Session\Storage\NativeSessionStorage::class, array());
