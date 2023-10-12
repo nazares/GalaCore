@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace Gala\Base;
 
+use Gala\Twig\TwigExtension;
 use Twig\Environtent;
-use Twig\FilesystemLoader;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
+use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
 
 class BaseView
