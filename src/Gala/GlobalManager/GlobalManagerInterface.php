@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Gala\Base\GlobalManager;
+namespace Gala\GlobalManager;
 
 interface GlobalManagerInterface
 {

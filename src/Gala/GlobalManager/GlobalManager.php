@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Gala\Base\GlobalManager;
+namespace Gala\GlobalManager;
 
 use Gala\GlobalManager\Exception\GlobalManagerException;
+use Gala\GlobalManager\Exception\GlobalManagerInvalidArgumentException;
 use Throwable;
 
 class GlobalManager implements GlobalManagerInterface
