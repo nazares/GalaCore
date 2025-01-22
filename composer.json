@@ -1,14 +1,41 @@
 {
     "name": "nazares/galacore",
     "description": "A simple PHP framework for building web application",
+    "keywords": ["framework", "php", "galacore"],
     "type": "library",
     "license": "MIT",
+    "readme": "",
+    "time": "",
+    "support": {
+        "issues": "https://github.com/nazares/GalaCore/issues",
+        "source": "https://github.com/nazares/GalaCore",
+        "wiki": "https://github.com/nazares/GalaCore/wiki"
+    },
     "authors": [
         {
             "name": "Sergei Nazarenko",
-            "email": "nazares@icloud.com"
+            "email": "nazares@icloud.com",
+            "role": "Developer"
         }
     ],
     "minimum-stability": "alpha",
-    "require": {}
+    "require": {
+        "php": "8.3.16|^8.4",
+        "ext-mbstring": "*",
+        "ext-iconv": "*",
+        "ext-pdo": "*",
+        "ext-json": "*",
+        "ext-curl": "*",
+        "ext-simplexml": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gala\\": "src/Gala"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Gala\\Tests\\": "tests/"
+        }
+    }
 }
