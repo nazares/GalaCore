@@ -30,21 +30,25 @@ class Crud implements CrudInterface
         $this->tableSchemaID = $tableSchemaID;
     }
 
+    /** @inheritDoc */
     public function getSchema(): string
     {
         return $this->tableSchema;
     }
 
+    /** @inheritDoc */
     public function getSchemaID(): string
     {
         return $this->tableSchemaID;
     }
 
+    /** @inheritDoc */
     public function lastID(): int
     {
         return $this->dataMapper->getLastId();
     }
 
+    /** @inheritDoc */
     public function create(array $fields = []): bool
     {
         try {
@@ -59,6 +63,7 @@ class Crud implements CrudInterface
         }
     }
 
+    /** @inheritDoc */
     public function read(
         array $selectors = [],
         array $conditions = [],
@@ -84,6 +89,7 @@ class Crud implements CrudInterface
         }
     }
 
+    /** @inheritDoc */
     public function update(array $fields = [], string $primaryKey = []): bool
     {
         try {
@@ -103,6 +109,7 @@ class Crud implements CrudInterface
         }
     }
 
+    /** @inheritDoc */
     public function delete(array $conditions = []): bool
     {
         try {
@@ -121,6 +128,7 @@ class Crud implements CrudInterface
         }
     }
 
+    /** @inheritDoc */
     public function search(array $selectors = [], array $conditions = []): array
     {
         try {
@@ -140,8 +148,23 @@ class Crud implements CrudInterface
         }
     }
 
+    /** @inheritDoc */
     public function rawQuery(string $rawQuery, ?array $conditions = [])
     {
-        //
+        try {
+            $args = [
+                'table' => $this->getSchema(),
+                'type' => 'raw',
+                'raw' => $rawQuery,
+                'conditions' => $conditions
+            ];
+            $query = $this->querBuilder->buildQuery($args)->rawQuery();
+            $this->dataMapper->persist($query, $this->dataMapper->buildQueryParameters($conditions));
+            if ($this->dataMapper->numRows()) {
+                // TODO:
+            }
+        } catch (Throwable $throwable) {
+            throw $throwable;
+        }
     }
 }
