@@ -45,7 +45,7 @@ interface DataMapperInterface
      *
      * @return void
      */
-    public function execute(): void;
+    public function execute();
 
     /**
      * Returns a single database row as an object

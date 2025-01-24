@@ -114,7 +114,16 @@ class DataMapper implements DataMapperInterface
         return $this->statement;
     }
 
-    protected function bindSearchValues(array $fields)
+    /**
+     * Binds a value to a corresponding name or question mark placeholder
+     * in the SQL statement that was used to prepare the statement. Similar to
+     * above but optimized for search queries
+     *
+     * @param array $fields
+     * @return mixed
+     * @throws DataMapperException
+     */
+    protected function bindSearchValues(array $fields): PDOStatement
     {
         $this->isArray($fields);
         foreach ($fields as $key => $value) {
@@ -124,7 +133,7 @@ class DataMapper implements DataMapperInterface
     }
 
     /** @inheritDoc */
-    public function execute(): void
+    public function execute()
     {
         if ($this->statement) {
             return $this->statement->execute();
@@ -165,6 +174,35 @@ class DataMapper implements DataMapperInterface
                     return intval($lastID);
                 }
             }
+        } catch (Throwable $throwable) {
+            throw $throwable;
+        }
+    }
+
+    /**
+     * Returns the query condition merged with the query parameters
+     *
+     * @param array $conditions
+     * @param array $parameters
+     * @return array
+     */
+    public function buildQueryParameters(array $conditions = [], array $parameters = []): array
+    {
+        return (!empty($parameters) || (!empty($conditions)) ? array_merge($conditions, $parameters) : $parameters);
+    }
+
+    /**
+     * Persist queries to database
+     *
+     * @param string $sqlQuery
+     * @param array $parameters
+     * @return mixed
+     * @throws Throwable
+     */
+    public function persist(string $sqlQuery, array $parameters)
+    {
+        try {
+            return $this->prepare($sqlQuery)->bindParameters($parameters)->execute();
         } catch (Throwable $throwable) {
             throw $throwable;
         }

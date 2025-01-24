@@ -29,7 +29,7 @@ class QueryBuilder implements QueryBuilderInterface
         'raw' => ''
     ];
 
-    protected const QUERY_TYPES = ['insert', 'select', 'update', 'delete', 'raw'];
+    protected const QUERY_TYPES = ['insert', 'select', 'update', 'delete', 'raw', 'search'];
 
     /**
      * Main constructor class
@@ -88,6 +88,7 @@ class QueryBuilder implements QueryBuilderInterface
     {
         if ($this->isQueryTypeValid('update')) {
             if (is_array($this->key['fields']) && count($this->key['fields']) > 0) {
+                $values = '';
                 foreach ($this->key["fields"] as $field) {
                     if ($field !== $this->key['primary_key']) {
                         $values .= sprintf("%s = :%s, ", $field, $field);
@@ -95,7 +96,13 @@ class QueryBuilder implements QueryBuilderInterface
                 }
                 $values = substr_replace($values, '', -2);
                 if (count($this->key['fields']) > 0) {
-                    $this->sqlQuery = "UPDATE {$this->key['table']} SET {$values} WHERE {$this->key['primary_key']} = :{$this->key['primary_key']} LIMIT 1";
+                    $this->sqlQuery = sprintf(
+                        "UPDATE %s SET %s WHERE %s = :%s LIMIT 1",
+                        $this->key['table'],
+                        $values,
+                        $this->key['primary_key'],
+                        $this->key['primary_key']
+                    );
                     if (isset($this->key['primary_key']) && $this->key['primary_key'] === '0') {
                         unset($this->key['primary_key']);
                         $this->sqlQuery = "UPDATE {$this->key['table']} SET {$values}";
@@ -123,6 +130,16 @@ class QueryBuilder implements QueryBuilderInterface
         return false;
     }
 
+    public function searchQuery(): string
+    {
+        return '';
+    }
+
+    public function rawQuery(): string
+    {
+        return '';
+    }
+
     private function hasConditions()
     {
         if (isset($this->key['conditions']) && $this->key['conditions'] != '') {
@@ -147,10 +164,5 @@ class QueryBuilder implements QueryBuilderInterface
             $this->sqlQuery .= " LIMIT :offset, :limit";
         }
         return $this->sqlQuery;
-    }
-
-    public function rawQuery(): string
-    {
-        #
     }
 }
