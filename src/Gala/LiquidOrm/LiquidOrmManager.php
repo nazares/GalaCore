@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Gala\LiquidOrm;
 
-use Gala\DatabaseConnection\DatabaseConnection;
 use Gala\LiquidOrm\DataMapper\DataMapperEnvironmentConfiguration;
-use Gala\LiquidOrm\DataMapper\DataMapperFactory;
-use Gala\LiquidOrm\EntityManager\Crud;
 use Gala\LiquidOrm\EntityManager\EntityManagerFactory;
-use Gala\LiquidOrm\QueryBuilder\QueryBuilder;
 use Gala\LiquidOrm\QueryBuilder\QueryBuilderFactory;
+use Gala\LiquidOrm\DataMapper\DataMapperFactory;
+use Gala\DatabaseConnection\DatabaseConnection;
+use Gala\LiquidOrm\QueryBuilder\QueryBuilder;
+use Gala\LiquidOrm\EntityManager\Crud;
 
 class LiquidOrmManager
 {
