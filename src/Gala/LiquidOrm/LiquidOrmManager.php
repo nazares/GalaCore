@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Gala\LiquidOrm;
 
 use Gala\DatabaseConnection\DatabaseConnection;
-use Gala\LiquidOrm\DataMapper\DataMapper;
 use Gala\LiquidOrm\DataMapper\DataMapperEnvironmentConfiguration;
 use Gala\LiquidOrm\DataMapper\DataMapperFactory;
 use Gala\LiquidOrm\EntityManager\Crud;
