@@ -6,7 +6,7 @@ namespace Gala\GlobalManager;
 
 interface GlobalManagerInterface
 {
-    public function set(string $key, mixed $value): void;
+    public static function set(string $key, mixed $value): void;
 
-    public function get(string $key): mixed;
+    public static function get(string $key): mixed;
 }

@@ -10,12 +10,12 @@ use Throwable;
 
 class GlobalManager implements GlobalManagerInterface
 {
-    public function set(string $key, mixed $value): void
+    public static function set(string $key, mixed $value): void
     {
         $GLOBALS[$key] = $value;
     }
 
-    public function get(string $key): mixed
+    public static function get(string $key): mixed
     {
         self::isGlobalValid($key);
         try {
