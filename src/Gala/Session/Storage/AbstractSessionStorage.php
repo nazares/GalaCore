@@ -65,7 +65,7 @@ abstract class AbstractSessionStorage implements SessionStorageInterface
         $secure = (isset($this->options['secure']) ? $this->options['secure'] : isset($_SERVER['HTTPS']));
 
         session_set_cookie_params(
-            $this->options['lifetime'],
+            (int)$this->options['lifetime'],
             $this->options['path'],
             $domain,
             $secure,

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Gala\Base;
 
+use Gala\Twig\TwigExtension;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 use Twig\Extension\DebugExtension;

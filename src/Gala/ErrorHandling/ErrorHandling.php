@@ -19,7 +19,7 @@ class ErrorHandling
         if (!error_reporting() && $severity) {
             return;
         }
-        throw new ErrorException($message, 0, $file, $line);
+        throw new ErrorException($message, code: 0, filename: $file, line: $line);
     }
 
     public static function exceptionHandler($exception)
