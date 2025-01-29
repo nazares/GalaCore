@@ -12,6 +12,10 @@ class SessionManager
     {
         $factory = new SessionFactory();
 
-        return $factory->create('galacore', \Gala\Session\Storage\NativeSessionStorage::class, YamlConfig::file('session'));
+        return $factory->create(
+            'galacore',
+            \Gala\Session\Storage\NativeSessionStorage::class,
+            YamlConfig::file('session')
+        );
     }
 }

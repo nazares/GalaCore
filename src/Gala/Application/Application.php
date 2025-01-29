@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Gala\Application;
 
+use Gala\Router\RouterManager;
 use Gala\Traits\SystemTrait;
 
 class Application
@@ -35,11 +36,11 @@ class Application
 
     private function constants(): void
     {
-        define('DS', '/');
-        define('APP_ROOT', $this->appRoot);
-        define('CONFIG_PATH', APP_ROOT . DS . "Config");
-        define('TEMPLATE_PATH', APP_ROOT . DS . 'App/templates');
-        define('LOG_DIR', APP_ROOT . DS . 'tmp/log');
+        defined('DS') or define('DS', '/');
+        defined('APP_ROOT') or define('APP_ROOT', $this->appRoot);
+        defined('CONFIG_PATH') or define('CONFIG_PATH', APP_ROOT . DS . "Config");
+        defined('TEMPLATE_PATH') or define('TEMPLATE_PATH', APP_ROOT . DS . 'App/templates');
+        defined('LOG_DIR') or define('LOG_DIR', APP_ROOT . DS . 'tmp/log');
     }
 
     private function environment()
@@ -57,6 +58,12 @@ class Application
     public function setSession()
     {
         self::sessionInit(true);
+        return $this;
+    }
+
+    public function setRouteHandler(string $url): self
+    {
+        RouterManager::dispatchRoute($url);
         return $this;
     }
 }

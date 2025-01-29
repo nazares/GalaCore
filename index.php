@@ -11,11 +11,7 @@ if (is_file($autoload)) {
 }
 
 use Gala\Application\Application;
-use Gala\GlobalManager\GlobalManager;
 
 (new Application(ROOT_PATH))
-    ->run()->setSession();
-
-$session = GlobalManager::get('global_session');
-$session->set('name', 'nazares');
-echo $session->get('name');
+->run()->setSession()
+->setRouteHandler($_SERVER['QUERY_STRING']);
